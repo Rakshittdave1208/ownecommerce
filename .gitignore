@@ -1,0 +1,42 @@
+# ======== Node & Package files ========
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ======== Environment variables ========
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ======== Build files ========
+build/
+dist/
+out/
+
+# ======== React cache ========
+.cache/
+.next/
+.vite/
+
+# ======== Editor & OS files ========
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ======== MongoDB local files ========
+data/
+dump/
+
+# ======== Logs ========
+logs/
+*.log
+
+# ======== Temporary files ========
+tmp/
+temp/
