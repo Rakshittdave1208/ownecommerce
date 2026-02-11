@@ -16,10 +16,14 @@ const productSchema=new mongoose.Schema(
       default:0
     },
     createdBy:{
-      type:mongoose.Schema.TYpes.ObjectId,
+      type:mongoose.Schema.Types.ObjectId,
       res:"UserProfile",
       required:true
     },
+    isActive:{
+      type:Boolean,
+      default:true,
+    }
   },
   {timestamps:true}
 );

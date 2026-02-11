@@ -9,7 +9,7 @@ const userProfileSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minlength: 7   // 👉 more than 6 characters
+      minlength: 7   //  more than 6 characters
     },
 
     role: {
