@@ -18,7 +18,7 @@ const productSchema=new mongoose.Schema(
     createdBy:{
       type:mongoose.Schema.Types.ObjectId,
       res:"UserProfile",
-      required:true
+      required:false,
     },
     isActive:{
       type:Boolean,

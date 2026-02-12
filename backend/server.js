@@ -5,24 +5,24 @@ const connectDB = require("./config/db");
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    withCredentials: true,
+  })
+);
 
 app.use(express.json());
-app.use(cors());
 
 connectDB();
 
-// app.use("/api/auth", require("./routes/auth"));
-// app.use("/api/products", require("./routes/product"));
+// Mount routes
+app.use("/api/products", require("./routes/product"));
+app.use("/api/cart", require("./routes/cart"));
 
 app.get("/", (req, res) => {
-  res.json({
-    status: "ok",
-    message: "Ecommerce backend running 🚀",
-    services: {
-      auth: "/api/auth",
-      products: "/api/products"
-    }
-  });
+  res.json({ message: "Backend running on port 5000" });
 });
 
 const PORT = process.env.PORT || 5000;
