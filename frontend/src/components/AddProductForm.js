@@ -12,15 +12,19 @@ export default function AddProductForm({ onSuccess }) {
     stock: 0,
   });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = async () => {
     try {
-      await addProduct(form);
-      onSuccess(); // 👈 IMPORTANT — tells table to refresh
-      setForm({ name: "", description: "", price: 0, stock: 0 });
+      const res = await addProduct(form);
+
+      onSuccess(res.data);   // pass created product to parent
+
+      setForm({
+        name: "",
+        description: "",
+        price: 0,
+        stock: 0,
+      });
+
     } catch (err) {
       console.error(err);
       alert("Failed to add product");
@@ -28,28 +32,46 @@ export default function AddProductForm({ onSuccess }) {
   };
 
   return (
-    <div className="p-4">
-      <h3>Add Product</h3>
+    <div className="mb-4">
+      <h4>Add Product</h4>
 
-      <InputText name="name" value={form.name}
-        placeholder="Name" onChange={handleChange} />
-      <br /><br />
+      <InputText
+        placeholder="Name"
+        value={form.name}
+        onChange={(e) =>
+          setForm({ ...form, name: e.target.value })
+        }
+        className="mr-2"
+      />
 
-      <InputText name="description" value={form.description}
-        placeholder="Description" onChange={handleChange} />
-      <br /><br />
+      <InputText
+        placeholder="Description"
+        value={form.description}
+        onChange={(e) =>
+          setForm({ ...form, description: e.target.value })
+        }
+        className="mr-2"
+      />
 
-      <InputNumber value={form.price}
+      <InputNumber
         placeholder="Price"
-        onChange={(e) => setForm({ ...form, price: e.value })} />
-      <br /><br />
+        value={form.price}
+        onValueChange={(e) =>
+          setForm({ ...form, price: e.value })
+        }
+        className="mr-2"
+      />
 
-      <InputNumber value={form.stock}
+      <InputNumber
         placeholder="Stock"
-        onChange={(e) => setForm({ ...form, stock: e.value })} />
-      <br /><br />
+        value={form.stock}
+        onValueChange={(e) =>
+          setForm({ ...form, stock: e.value })
+        }
+        className="mr-2"
+      />
 
-      <Button label="Add Product" onClick={handleSubmit} />
+      <Button label="Add" onClick={handleSubmit} />
     </div>
   );
 }

@@ -1,24 +1,10 @@
-import { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { getProducts } from "../services/api";
 
-export default function ProductTable({ refreshKey }) {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    getProducts()
-      .then((res) => {
-        console.log("Products from backend:", res.data);
-        setProducts(res.data);
-      })
-      .catch((err) => console.error("API error:", err));
-  }, [refreshKey]);   // 🔹 IMPORTANT CHANGE
-
+export default function ProductTable({ products }) {
   return (
-    <div className="p-4">
-      <h2>Products</h2>
-      <DataTable value={products}>
+    <div>
+      <DataTable value={products} emptyMessage="No products available">
         <Column field="name" header="Name" />
         <Column field="description" header="Description" />
         <Column field="price" header="Price" />
@@ -27,4 +13,5 @@ export default function ProductTable({ refreshKey }) {
     </div>
   );
 }
+
 

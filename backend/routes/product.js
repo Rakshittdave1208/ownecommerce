@@ -1,9 +1,32 @@
 const express = require("express");
-const controller = require("../controllers/productController");
+const passport = require("passport");
+const { authorize } = require("../middleware/roleMiddleware");
+const {
+  createProduct,
+  getAllProducts,
+  updateProduct,
+  deleteProduct
+} = require("../controllers/productController");
 
 const router = express.Router();
 
-router.get("/", controller.getAllProducts);
-router.post("/", controller.createProduct);
+// Public
+router.get("/", getAllProducts);
+
+// Admin + Retailer
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  authorize("admin", "retailer"),
+  createProduct
+);
+
+// Only Admin delete
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  authorize("admin"),
+  deleteProduct
+);
 
 module.exports = router;
