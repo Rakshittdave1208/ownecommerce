@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      
       <div className="p-4">
         <h2>All Products</h2>
         <DataTable value={products}>
